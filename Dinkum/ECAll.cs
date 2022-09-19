@@ -39,7 +39,7 @@ namespace EC_AllInOne
 		{
 
 			if (Input.GetKeyDown(KeyCode.F9)){
-				NetworkMapSharer.share.spawnACarryable(SaveLoad.saveOrLoad.carryablePrefabs[3], NetworkMapSharer.share.localChar.transform.position, true);
+				
 			}
 			if (Input.GetKeyDown(KeyCode.F11))
 			{
