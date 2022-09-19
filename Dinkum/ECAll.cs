@@ -50,7 +50,7 @@ namespace EC_AllInOne
 
 			if (Input.GetKeyDown(KeyCode.F10)&&fish_running==false)
 			{
-				NotificationManager.manage.createChatNotification("开心钓鱼模式开启");
+				NotificationManager.manage.createChatNotification("消遣钓鱼模式开启");
 				StatusManager.manage.addBuff(StatusManager.BuffType.fishingBuff, 1000, 1);
 				_harmony = new Harmony("easyfishing");
 				_harmony.PatchAll();
@@ -72,7 +72,7 @@ namespace EC_AllInOne
 			}else if(Input.GetKeyDown(KeyCode.F10) && fish_running == true)
             {
 				_harmony.UnpatchSelf();
-				NotificationManager.manage.createChatNotification("开心钓鱼模式关闭");
+				NotificationManager.manage.createChatNotification("消遣钓鱼模式关闭");
 				AnimalManager.manage.fishBookOpen = false;
 				AnimalManager.manage.lookAtFishBook.Invoke();
 				fish_running =false;

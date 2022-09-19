@@ -4,3 +4,7 @@ D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\ECAllInOne.csproj.AssemblyRefere
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\ECAllInOne.csproj.CoreCompileInputs.cache
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.dll
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.pdb
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\ECAllInOne.csproj.AssemblyReference.cache
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\ECAllInOne.csproj.CoreCompileInputs.cache
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\HelloMod.dll
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\HelloMod.pdb

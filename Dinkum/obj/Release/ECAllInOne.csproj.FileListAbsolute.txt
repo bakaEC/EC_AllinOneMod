@@ -1,0 +1,6 @@
+D:\Desktop\dev\Code\Dinkum\Dinkum\bin\Release\HelloMod.dll
+D:\Desktop\dev\Code\Dinkum\Dinkum\bin\Release\HelloMod.pdb
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Release\ECAllInOne.csproj.AssemblyReference.cache
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Release\ECAllInOne.csproj.CoreCompileInputs.cache
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Release\HelloMod.dll
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Release\HelloMod.pdb
