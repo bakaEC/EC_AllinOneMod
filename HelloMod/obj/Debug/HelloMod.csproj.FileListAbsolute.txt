@@ -1,0 +1,8 @@
+D:\Desktop\dev\Code\HelloMod\HelloMod\bin\Debug\HelloMod.dll
+D:\Desktop\dev\Code\HelloMod\HelloMod\bin\Debug\HelloMod.pdb
+D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.csproj.AssemblyReference.cache
+D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.csproj.CoreCompileInputs.cache
+D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.dll
+D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.pdb
+D:\Desktop\dev\Dinkum\BepInEx\plugins\HelloMod.dll
+D:\Desktop\dev\Dinkum\BepInEx\plugins\HelloMod.pdb
