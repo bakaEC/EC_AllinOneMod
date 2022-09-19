@@ -39,7 +39,9 @@ namespace EC_AllInOne
 		{
 
 			if (Input.GetKeyDown(KeyCode.F9)){
-				
+				NotificationManager.manage.createChatNotification("噜噜");
+				WorldManager.manageWorld.doNextDayChange();
+
 			}
 			if (Input.GetKeyDown(KeyCode.F11))
 			{

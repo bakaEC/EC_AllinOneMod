@@ -1,10 +1,10 @@
-D:\Desktop\dev\Dinkum\BepInEx\plugins\HelloMod.dll
-D:\Desktop\dev\Dinkum\BepInEx\plugins\HelloMod.pdb
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\ECAllInOne.csproj.AssemblyReference.cache
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\ECAllInOne.csproj.CoreCompileInputs.cache
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.dll
 D:\Desktop\dev\Code\HelloMod\HelloMod\obj\Debug\HelloMod.pdb
 D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\ECAllInOne.csproj.AssemblyReference.cache
 D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\ECAllInOne.csproj.CoreCompileInputs.cache
-D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\HelloMod.dll
-D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\HelloMod.pdb
+D:\Desktop\dev\Dinkum\BepInEx\plugins\ECAllinOne.dll
+D:\Desktop\dev\Dinkum\BepInEx\plugins\ECAllinOne.pdb
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\ECAllinOne.dll
+D:\Desktop\dev\Code\Dinkum\Dinkum\obj\Debug\ECAllinOne.pdb
