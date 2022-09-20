@@ -23,6 +23,7 @@ namespace EC_AllInOne
         private Harmony _harmony;
 		public static float _newTimer = 0.45f;
 		public static float _radius = 3.5f;
+		int count = 0;
 		public static bool _struggle = false;
 		public static bool _skipMinigame = false;
 		bool fish_running = false;
@@ -38,12 +39,60 @@ namespace EC_AllInOne
 		void Update()
 		{
 
-			if (Input.GetKeyDown(KeyCode.F9)){
-				NotificationManager.manage.createChatNotification("噜噜");
-				WorldManager.manageWorld.doNextDayChange();
+			if (Input.GetKeyDown(KeyCode.L))
+			{
+				NotificationManager.manage.createChatNotification("正在获取所有邮件内容");
+				/*MailManager.manage.openMailWindow();*/
 
+				while (count < 20)
+				{
+					Logger.LogInfo(count++);
+					/*MailManager.manage.showLetter(count);
+					*/
+					MailManager.manage.openMailWindow();
+					try
+					{
+						MailManager.manage.showLetter(1);
+						MailManager.manage.takeAttachment();
+						MailManager.manage.closeMailWindow();
+
+					}
+					catch (Exception ex) { Logger.LogInfo("getattach fail"); }
+					try
+					{
+						MailManager.manage.showLetter(1);
+						MailManager.manage.deleteButton();
+						MailManager.manage.closeMailWindow();
+
+					}
+					catch (Exception ex) { Logger.LogInfo("delete fail"); continue; }
+
+				}
 			}
-			if (Input.GetKeyDown(KeyCode.F11))
+			else if (Input.GetKeyUp(KeyCode.L))
+			{
+				try
+				{
+					MailManager.manage.showLetter(0);
+					MailManager.manage.takeAttachment();
+					MailManager.manage.closeMailWindow();
+
+				}
+				catch (Exception ex) { Logger.LogInfo("getattach fail"); }
+				try
+				{
+					MailManager.manage.showLetter(0);
+					MailManager.manage.deleteButton();
+					MailManager.manage.closeMailWindow();
+
+				}
+				catch (Exception ex) { Logger.LogInfo("delete fail");}
+				count = 0;
+				MailManager.manage.closeShowLetterWindow();
+				MailManager.manage.closeMailWindow();
+				NotificationManager.manage.makeTopNotification("已经获取并删除所有邮件！");
+			}
+			if (Input.GetKeyUp(KeyCode.F11))
 			{
 				NotificationManager.manage.createChatNotification("手动保存中!");
 				NetworkPlayersManager.manage.saveButton();
@@ -71,6 +120,7 @@ namespace EC_AllInOne
 				AnimalManager.manage.fishBookOpen = true;
 				AnimalManager.manage.lookAtFishBook.Invoke();
 				fish_running = true;
+				
 			}else if(Input.GetKeyDown(KeyCode.F10) && fish_running == true)
             {
 				_harmony.UnpatchSelf();
@@ -79,17 +129,7 @@ namespace EC_AllInOne
 				AnimalManager.manage.lookAtFishBook.Invoke();
 				fish_running =false;
 			}
-			/*if (Input.GetKeyDown(KeyCode.F9)&&fish_seek==false)
-			{
-				AnimalManager.manage.fishBookOpen = true;
-				AnimalManager.manage.lookAtFishBook.Invoke();
-				fish_seek = true;
-			}else if (Input.GetKeyDown(KeyCode.F9) && fish_seek == true)
-            {
-				AnimalManager.manage.fishBookOpen = false;
-				AnimalManager.manage.lookAtFishBook.Invoke();
-				fish_seek=false;
-            }*/
+			
 		}
 
 	}
