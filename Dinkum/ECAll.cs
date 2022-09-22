@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.Security;
-using UnityEngine.Bindings;
-using UnityEngine.Internal;
-using UnityEngine.Scripting;
-using UnityEngineInternal;
+
 using System.Reflection;
 using BepInEx;
 using UnityEngine;
-using UnityEngine.Events;
 using HarmonyLib;
+using BepInEx.Configuration;
+using BepInEx.Core.Logging.Interpolation;
+using BepInEx.Logging;
 
 namespace EC_AllInOne
 {
-    [BepInPlugin("cc.bakae.plugin", "ec_allinone", "0.0.1")]
+    [BepInPlugin("cc.bakae.plugin", "ec_allinone", "0.0.2")]
     public class AutoSave: BaseUnityPlugin
     {
         private Harmony _harmony;
@@ -27,21 +22,38 @@ namespace EC_AllInOne
 		public static bool _struggle = false;
 		public static bool _skipMinigame = false;
 		bool fish_running = false;
-		bool fish_seek = false;
+
+
+		ConfigEntry<KeyCode> _SavehotKey;
+		ConfigEntry<KeyCode> _MailhotKey;
+		ConfigEntry<KeyCode> _FishhotKey;
 
 		void Start()
         {
+			
+			_SavehotKey = base.Config.Bind<KeyCode>("config", "save", KeyCode.N, "Manual Save Hotkey");
+			_MailhotKey = base.Config.Bind<KeyCode>("config", "mail", KeyCode.L, "Mail grabber Hotkey");
+			_FishhotKey = base.Config.Bind<KeyCode>("config", "fish", KeyCode.F10, "Fish helper Hotkey");
 
-            Logger.LogInfo("EC active!");
-            
-        }
+			ManualLogSource logger = base.Logger;
+			bool flag=false;
+			BepInExInfoLogInterpolatedStringHandler bepInExInfoLogInterpolatedStringHandler = new BepInExInfoLogInterpolatedStringHandler(18, 1, out flag);
+			if (flag)
+			{
+				bepInExInfoLogInterpolatedStringHandler.AppendLiteral("Plugin ");
+				bepInExInfoLogInterpolatedStringHandler.AppendFormatted<string>("cc.bakae.plugin.Allinone");
+				bepInExInfoLogInterpolatedStringHandler.AppendLiteral(" is loaded!");
+			}
+			logger.LogInfo(bepInExInfoLogInterpolatedStringHandler);
+
+		}
 
 		void Update()
 		{
 
-			if (Input.GetKeyDown(KeyCode.L))
+			if (Input.GetKeyDown(this._MailhotKey.Value))
 			{
-				NotificationManager.manage.createChatNotification("正在获取所有邮件内容");
+				NotificationManager.manage.createChatNotification("Mail Recieving");
 				/*MailManager.manage.openMailWindow();*/
 
 				while (count < 20)
@@ -69,7 +81,7 @@ namespace EC_AllInOne
 
 				}
 			}
-			else if (Input.GetKeyUp(KeyCode.L))
+			else if (Input.GetKeyUp(this._MailhotKey.Value))
 			{
 				try
 				{
@@ -90,18 +102,18 @@ namespace EC_AllInOne
 				count = 0;
 				MailManager.manage.closeShowLetterWindow();
 				MailManager.manage.closeMailWindow();
-				NotificationManager.manage.makeTopNotification("已经获取并删除所有邮件！");
+				NotificationManager.manage.makeTopNotification("Rewards Got! Mails Deleted!");
 			}
-			if (Input.GetKeyUp(KeyCode.F11))
+			if (Input.GetKeyUp(this._SavehotKey.Value))
 			{
-				NotificationManager.manage.createChatNotification("手动保存中!");
+				NotificationManager.manage.createChatNotification("Mannual saving...");
 				NetworkPlayersManager.manage.saveButton();
 			}
 			
 
-			if (Input.GetKeyDown(KeyCode.F10)&&fish_running==false)
+			if (Input.GetKeyDown(this._FishhotKey.Value)&&fish_running==false)
 			{
-				NotificationManager.manage.createChatNotification("消遣钓鱼模式开启");
+				NotificationManager.manage.createChatNotification("Easyfish ON");
 				StatusManager.manage.addBuff(StatusManager.BuffType.fishingBuff, 1000, 1);
 				_harmony = new Harmony("easyfishing");
 				_harmony.PatchAll();
@@ -121,28 +133,28 @@ namespace EC_AllInOne
 				AnimalManager.manage.lookAtFishBook.Invoke();
 				fish_running = true;
 				
-			}else if(Input.GetKeyDown(KeyCode.F10) && fish_running == true)
+			}else if(Input.GetKeyDown(this._FishhotKey.Value) && fish_running == true)
             {
 				_harmony.UnpatchSelf();
-				NotificationManager.manage.createChatNotification("消遣钓鱼模式关闭");
+				NotificationManager.manage.createChatNotification("Easyfish OFF");
 				AnimalManager.manage.fishBookOpen = false;
 				AnimalManager.manage.lookAtFishBook.Invoke();
 				fish_running =false;
 			}
 			
 		}
+		
 
 	}
         
     }
     class Patches{
-		// Token: 0x06000003 RID: 3 RVA: 0x00002234 File Offset: 0x00000434
+
 		private static void DebugInstructions(IList<CodeInstruction> instructions)
 		{
 			
 		}
 
-		// Token: 0x06000004 RID: 4 RVA: 0x0000228C File Offset: 0x0000048C
 		private static int? FindPattern(IList<CodeInstruction> instructions, IReadOnlyCollection<string> pattern)
 		{
 			int? result = null;
@@ -166,7 +178,6 @@ namespace EC_AllInOne
 			return result;
 		}
 
-		// Token: 0x06000005 RID: 5 RVA: 0x00002320 File Offset: 0x00000520
 		private static IEnumerable<CodeInstruction> OnLocalBiteTimerTranspiler(IEnumerable<CodeInstruction> instructions)
 		{
 			List<CodeInstruction> list = Enumerable.ToList<CodeInstruction>(instructions);
@@ -222,13 +233,12 @@ namespace EC_AllInOne
 			return list;
 		}
 
-		// Token: 0x06000007 RID: 7 RVA: 0x000024F8 File Offset: 0x000006F8
 		private static bool FishStrugglePrefix()
 		{
 			return EC_AllInOne.AutoSave._struggle;
 		}
 
-		// Token: 0x06000008 RID: 8 RVA: 0x00002504 File Offset: 0x00000704
+
 		private static void SpawnFishDummyPostfix(FishingRodCastAndReel __instance)
 		{
 			if (!EC_AllInOne.AutoSave._skipMinigame)
@@ -237,5 +247,7 @@ namespace EC_AllInOne
 			}
 			__instance.networkVersion.CmdCompleteReel();
 		}
-	}
+	
+}
+
 
